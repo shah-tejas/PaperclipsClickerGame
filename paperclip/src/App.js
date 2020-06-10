@@ -1,55 +1,66 @@
 import React from 'react';
 import './App.css';
+import Paperclip from './components/Paperclip';
+import ls from 'local-storage';
 
 class App extends React.Component {
   
   constructor(props) {
     super(props);
+    let oldscores = ls.get('scores') ? ls.get('scores') : [];
     this.state = {
-      paperclips: 0,
-      autoclipers: 0
+      startGame: false,
+      scores: oldscores
     };
-    this.makePaperClip = this.makePaperClip.bind(this);
-    this.buyAutoClipper = this.buyAutoClipper.bind(this);
-    this.autobuy = this.autobuy.bind(this);
-    setInterval(() => {
-      this.autobuy();
-    }, 500);
+    this.start = this.start.bind(this);
+    this.checkGameStatus = this.checkGameStatus.bind(this);
+    this.updateScores = this.updateScores.bind(this);
   }
 
-  makePaperClip() {
-    this.setState(prevState => {
-      return {paperclips: prevState.paperclips+1}
-    });
+  start() {
+    this.setState(() => ({
+      startGame : true
+    }));
+    ls.set('startGame', true);
+    // let gamestatusinterval = setInterval(() => {
+    //   this.checkGameStatus();
+    //   if(!this.state.startGame) {
+    //     this.updateScores();
+    //     clearInterval(gamestatusinterval);
+    //   }
+    // }, 600);
   }
 
-  buyAutoClipper() {
-    if(this.state.paperclips >= 5) {
-      this.setState(prevState => {
-        return {
-          paperclips: prevState.paperclips-5,
-          autoclipers: prevState.autoclipers+1
-        }
+  checkGameStatus() {
+    if(!ls.get('startGame')) {
+      this.setState({
+        startGame: false
       });
     }
   }
 
-  autobuy() {
-    if(this.state.autoclipers) {
-      this.setState(prevState => ({
-        paperclips: prevState.paperclips + prevState.autoclipers
-      }));
-    }
+  updateScores() {
+    this.setState({
+      scores: ls.get('scores')
+    });
   }
 
   render() {
     return (
       <div className="App">
-        Paperclips: {this.state.paperclips} <br/>
-        Clippers: {this.state.autoclipers}<br/>
-  
-        <button onClick={this.makePaperClip}>Make Paperclip</button><br/>
-        <button onClick={this.buyAutoClipper}>Buy Automatic Clipper (costs 5 paperclips)</button>
+        {
+          this.state.startGame ?
+            <Paperclip /> :
+            <div>
+              <button onClick={this.start}>Start Game!</button>
+              <h3>High Scores:</h3>
+              <ul>
+                {this.state.scores.map((score, index) => (
+                  <li key={index}>{score}</li>
+                ))}
+              </ul>
+            </div>
+        }
       </div>
     );
   }
