@@ -22,13 +22,6 @@ class App extends React.Component {
       startGame : true
     }));
     ls.set('startGame', true);
-    // let gamestatusinterval = setInterval(() => {
-    //   this.checkGameStatus();
-    //   if(!this.state.startGame) {
-    //     this.updateScores();
-    //     clearInterval(gamestatusinterval);
-    //   }
-    // }, 600);
   }
 
   checkGameStatus() {
@@ -48,17 +41,16 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <h3>How fast can you make 1,000 paper clips?</h3>
         {
           this.state.startGame ?
             <Paperclip /> :
             <div>
               <button onClick={this.start}>Start Game!</button>
               <h3>High Scores:</h3>
-              <ul>
                 {this.state.scores.map((score, index) => (
-                  <li key={index}>{score}</li>
+                  <p key={index}>{score}</p>
                 ))}
-              </ul>
             </div>
         }
       </div>

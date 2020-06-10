@@ -1,5 +1,8 @@
 import React from 'react';
 import ls from 'local-storage';
+import paperclip from '../images/paperclip.jpg';
+import ai from '../images/ai.webp';
+import './Paperclip.css';
 
 class Paperclip extends React.Component {
   
@@ -24,8 +27,7 @@ class Paperclip extends React.Component {
   makePaperClip() {
     this.setState(prevState => {
       return {paperclips: prevState.paperclips+1}
-    });
-    this.checkGame();
+    }, this.checkGame());
   }
 
   buyAutoClipper() {
@@ -43,13 +45,12 @@ class Paperclip extends React.Component {
     if(this.state.autoclipers) {
       this.setState(prevState => ({
         paperclips: prevState.paperclips + prevState.autoclipers
-      }));
-      this.checkGame();
+      }), this.checkGame());
     }
   }
 
   checkGame() {
-    if(this.state.paperclips >= 10) {
+    if(this.state.paperclips >= 1000) {
       let gameEnd = (new Date().getTime() - this.state.startTime.getTime()) / 1000;
       this.setState({
         gameStart: false,
@@ -63,10 +64,13 @@ class Paperclip extends React.Component {
       }
       scores.push(gameEnd);
       scores.sort((score1, score2) => score1 - score2);
-      let scoresCount = 0;
-      scores.filter(score => scoresCount++ <= 10);
+      let newScores = [];
+      let i = 0;
+      while(i < 10 && i < scores.length) {
+        newScores.push(scores[i++]);
+      }
 
-      ls.set('scores', scores);
+      ls.set('scores', newScores);
     }
   }
 
@@ -74,19 +78,19 @@ class Paperclip extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="gamearea">
         {
           this.state.gameStart ? 
-            <div>
-              Paperclips: {this.state.paperclips} <br/>
-              Clippers: {this.state.autoclipers}<br/>
-  
-              <button onClick={this.makePaperClip}>Make Paperclip</button><br/>
-              <button onClick={this.buyAutoClipper}>Buy Automatic Clipper (costs 5 paperclips)</button>
+            <div class="game-grid">
+              <img onClick={this.makePaperClip} src={paperclip} alt="Paperclips" width="250px" height="250px" />
+              <img onClick={this.buyAutoClipper} src={ai} alt="Automatic Clipper" width="250px" height="250px" />
+
+              <span>Paperclips: {this.state.paperclips}</span>
+              <span>Clippers: {this.state.autoclipers}</span>
             </div>
             :
             <div>
-              <p>Game Over!</p>
+              <p>Success! You made 1,000 paper clips</p>
               <p>Your score is {this.state.gameTime} seconds.</p>
               <button onClick={() => window.location.reload(false)}>Go Back!</button>
             </div>
