@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/PaperclipsClickerGame/static/css/main.3772d5ed.chunk.css",
+    "main.js": "/PaperclipsClickerGame/static/js/main.5b32780b.chunk.js",
+    "main.js.map": "/PaperclipsClickerGame/static/js/main.5b32780b.chunk.js.map",
+    "runtime-main.js": "/PaperclipsClickerGame/static/js/runtime-main.4a01e588.js",
+    "runtime-main.js.map": "/PaperclipsClickerGame/static/js/runtime-main.4a01e588.js.map",
+    "static/js/2.e5c51c6f.chunk.js": "/PaperclipsClickerGame/static/js/2.e5c51c6f.chunk.js",
+    "static/js/2.e5c51c6f.chunk.js.map": "/PaperclipsClickerGame/static/js/2.e5c51c6f.chunk.js.map",
+    "index.html": "/PaperclipsClickerGame/index.html",
+    "precache-manifest.f381a030f3d9abafe4a155b2fb308fa3.js": "/PaperclipsClickerGame/precache-manifest.f381a030f3d9abafe4a155b2fb308fa3.js",
+    "service-worker.js": "/PaperclipsClickerGame/service-worker.js",
+    "static/css/main.3772d5ed.chunk.css.map": "/PaperclipsClickerGame/static/css/main.3772d5ed.chunk.css.map",
+    "static/js/2.e5c51c6f.chunk.js.LICENSE.txt": "/PaperclipsClickerGame/static/js/2.e5c51c6f.chunk.js.LICENSE.txt",
+    "static/media/ai.webp": "/PaperclipsClickerGame/static/media/ai.c07f374e.webp",
+    "static/media/paperclip.jpg": "/PaperclipsClickerGame/static/media/paperclip.670a3d03.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4a01e588.js",
+    "static/js/2.e5c51c6f.chunk.js",
+    "static/css/main.3772d5ed.chunk.css",
+    "static/js/main.5b32780b.chunk.js"
+  ]
+}
